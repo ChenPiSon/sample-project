@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource" class="com.yulintu.thematic.data.sharding.ShardingBean">
+        <property name="shards">
+            <list>
+                <!--*-->
+                <bean class="com.yulintu.thematic.data.sharding.ShardElement">
+                    <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
+                    <property name="name" value="主库00"/>
+                    <property name="group" value="init"/>
+                    <property name="connectionString"
+                              value="configure=datasources/spring.datasource.oracle.xml;type=spring"/>
+                    <property name="properties">
+                        <props>
+                            <prop key="init"/>
+                        </props>
+                    </property>
+                </bean>
+
+                <bean class="com.yulintu.thematic.data.sharding.ShardElement">
+                    <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
+                    <property name="name" value="主库01"/>
+                    <property name="group" value="*"/>
+                    <property name="connectionString"
+                              value="configure=datasources/spring.datasource.querydsl.xml;type=spring"/>
+                    <property name="properties">
+                        <props>
+                            <prop key="*"/>
+                        </props>
+                    </property>
+                </bean>
+
+                <!--分库-->
+                <bean class="com.yulintu.thematic.data.sharding.ShardElement">
+                    <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
+                    <property name="name" value="分库00"/>
+                    <property name="group" value="zoneCode"/>
+                    <property name="connectionString"
+                              value="configure=datasources/spring.datasource.oracle.xml;type=spring"/>
+                    <property name="properties">
+                        <props>
+                            <prop key="zone">5101</prop>
+                        </props>
+                    </property>
+                </bean>
+                <bean class="com.yulintu.thematic.data.sharding.ShardElement">
+                    <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
+                    <property name="name" value="分库01"/>
+                    <property name="group" value="zoneCode"/>
+                    <property name="connectionString"
+                              value="configure=datasources/spring.datasource.oracle1.xml;type=spring"/>
+                    <property name="properties">
+                        <props>
+                            <prop key="zone">5102</prop>
+                        </props>
+                    </property>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+</beans>

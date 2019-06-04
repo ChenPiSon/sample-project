@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: sample-project
+    version: 1.0-SNAPSHOT
+    title: 示例Sample
+    description: Sample工程
+    entry: com.yulintu.business
+
+info:
+  app:
+    encoding: UTF-8
+    version: 1.0-SNAPSHOT
+  java:
+    source: 1.8.0_181
+    target: 1.8.0_181
+
+datasource:
+  sharding: false
+
+activiti:
+    database-schema-update: true
+    check-process-definitions: false
+
+authorization:
+  name: token
+  swagger: true
+  path:
+    includes: /**
+    excludes: /druid/**,/swagger-resources/**,/v2/**
+
+server:
+  port: 8080

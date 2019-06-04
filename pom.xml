@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yulintu</groupId>
+    <artifactId>sample-project</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sample-project-web-backend</module>
+        <module>sample-project-business</module>
+        <module>sample-project-entities</module>
+        <module>sample-project-business-cache</module>
+        <module>sample-project-business-activiti</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>local-nexus-maven</id>
+            <url>http://192.168.20.10:8081/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>local-nexus-maven</id>
+            <url>http://192.168.20.10:8081/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <properties>
+        <thematic.version>1.1.10.11-RELEASE</thematic.version>
+        <java.version>1.8</java.version>
+        <lombok.version>1.16.20</lombok.version>
+        <activiti.version>6.0.0</activiti.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yulintu</groupId>
+            <artifactId>thematic-spring-boot-starter-core</artifactId>
+            <version>${thematic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yulintu</groupId>
+            <artifactId>thematic-data-redis</artifactId>
+            <version>${thematic.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
