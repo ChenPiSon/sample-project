@@ -1,5 +1,6 @@
 package com.yulintu.business.configurations;
 
+import com.yulintu.thematic.data.ThreadAwareDataSourceProxy;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -27,10 +28,9 @@ public class ActivitiConfiguration {
     @Bean
     public SpringProcessEngineConfiguration springProcessEngineConfiguration(){
         SpringProcessEngineConfiguration spec = new SpringProcessEngineConfiguration();
-        spec.setDataSource(dataSource);
+        spec.setDataSource(new ThreadAwareDataSourceProxy(dataSource));
         spec.setTransactionManager(platformTransactionManager);
         spec.setDatabaseSchemaUpdate("true");
-
         return spec;
     }
 

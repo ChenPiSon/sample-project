@@ -15,7 +15,7 @@ info:
     target: 1.8.0_181
 
 datasource:
-  sharding: false
+  sharding: true
 
 activiti:
     database-schema-update: true

@@ -29,7 +29,6 @@
                 </property>
             </bean>
         </constructor-arg>
-        <!--<property name="reobtainTransactionalConnections" value="true"/>-->
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -39,7 +38,6 @@
             <props>
                 <prop key="provider.type">postgresql</prop>
                 <prop key="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect</prop>
-
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.jdbc.batch_size">1</prop>

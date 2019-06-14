@@ -25,11 +25,10 @@ public class ProcessDeploymentServiceImpl extends ServiceImpl implements IProces
     @Override
     public boolean deleteDeployment(String deploymentId) {
 
-//       long result= repositoryService.createDeploymentQuery().deploymentId(deploymentId).count();
-//        if(result == 0){
-//            throw new ApiException("该流程不存在");
-//        }
-
+       long result= repositoryService.createDeploymentQuery().deploymentId(deploymentId).count();
+        if(result == 0){
+            throw new ApiException("该流程不存在");
+        }
         repositoryService.deleteDeployment(deploymentId);
         return  true;
     }

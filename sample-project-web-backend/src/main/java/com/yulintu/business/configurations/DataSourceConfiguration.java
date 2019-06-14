@@ -1,41 +1,33 @@
 package com.yulintu.business.configurations;
-
 import com.yulintu.thematic.data.*;
 import com.yulintu.thematic.data.hibernate.EntityManagerFactoryPool;
 import com.yulintu.thematic.data.hibernate.HibernateConnectionStringBuilder;
 import com.yulintu.thematic.data.redis.RedisConnectionStringBuilder;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
-
-
 
 
 @Configuration
 public class DataSourceConfiguration {
 
-    @Bean
+    @Bean(name = "dataSourceSingle")
     public DataSource dataSource() {
 
         ClassPathXmlApplicationContext ac = ClassPathXmlApplicationContextPool.findInitialize("datasources/spring.datasource.xml");
         DataSource ds1 = ac.getBean(DataSource.class);
-//      ac = ClassPathXmlApplicationContextPool.findInitialize("datasources/spring.datasource.querydsl.xml");
-//      DataSource ds2 = ac.getBean(DataSource.class);
-//      return Arrays.asList(ds1, ds2);
+
         return ds1;
     }
 
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        return new DefaultTransactionManager();
+        return new ThreadAwareTransactionManager();
     }
 
     @Bean
-    @Primary
     @Scope("prototype")
     public Provider provider1() {
         HibernateConnectionStringBuilder builder = new HibernateConnectionStringBuilder();
@@ -54,7 +46,6 @@ public class DataSourceConfiguration {
         builder.setConfigureFilePath("datasources/spring.datasource.querydsl.xml");
         builder.setConfigureFileType("spring");
         String connectionString = builder.getConnectionString();
-
         EntityManagerFactoryPool.initialize(connectionString);
         String providerType = EntityManagerFactoryPool.getProviderType(connectionString);
         return ProviderUtils.create(providerType, connectionString);
@@ -62,13 +53,14 @@ public class DataSourceConfiguration {
 
 
 
-//    @Bean
-//    @Scope("prototype")
-//    public Provider provider3() {
-//        FileConnectionStringBuilder builder = new FileConnectionStringBuilder();
-//        builder.setFilePath("datasources/spring.datasource.shards.xml");
-//        return ProviderUtils.create("sharding", builder.getConnectionString());
-//    }
+    @Bean
+    @Primary
+    @Scope("prototype")
+    public Provider provider3() {
+        FileConnectionStringBuilder builder = new FileConnectionStringBuilder();
+        builder.setFilePath("datasources/spring.datasource.shards.xml");
+        return ProviderUtils.create("sharding", builder.getConnectionString());
+    }
 
 
     @Bean

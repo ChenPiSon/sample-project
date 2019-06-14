@@ -21,8 +21,8 @@ public class EntityGenerator {
 
     public static void main(String[] args) {
 
-        RedisConnectionStringBuilder builder=new RedisConnectionStringBuilder("configure=datasources/spring.datasource.redis.xml");
-        ProviderRedis provider0 = new ProviderRedisImpl(builder.getConnectionString());
+//        RedisConnectionStringBuilder builder=new RedisConnectionStringBuilder("configure=datasources/spring.datasource.redis.xml");
+//        ProviderRedis provider0 = new ProviderRedisImpl(builder.getConnectionString());
 
 
         ProviderPersistence provider = createByFileName("datasources/spring.datasource.oracle.xml");

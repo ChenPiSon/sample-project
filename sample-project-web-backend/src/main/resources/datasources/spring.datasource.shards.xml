@@ -7,29 +7,16 @@
     <bean id="dataSource" class="com.yulintu.thematic.data.sharding.ShardingBean">
         <property name="shards">
             <list>
-                <!--*-->
-                <bean class="com.yulintu.thematic.data.sharding.ShardElement">
-                    <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
-                    <property name="name" value="主库00"/>
-                    <property name="group" value="init"/>
-                    <property name="connectionString"
-                              value="configure=datasources/spring.datasource.oracle.xml;type=spring"/>
-                    <property name="properties">
-                        <props>
-                            <prop key="init"/>
-                        </props>
-                    </property>
-                </bean>
-
                 <bean class="com.yulintu.thematic.data.sharding.ShardElement">
                     <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
                     <property name="name" value="主库01"/>
-                    <property name="group" value="*"/>
+                    <property name="group" value="分库0"/>
                     <property name="connectionString"
-                              value="configure=datasources/spring.datasource.querydsl.xml;type=spring"/>
+                              value="configure=datasources/spring.datasource.xml;type=spring"/>
                     <property name="properties">
                         <props>
-                            <prop key="*"/>
+                            <!--<prop key="*"/>-->
+                            <prop key="zone">510102</prop>
                         </props>
                     </property>
                 </bean>
@@ -37,10 +24,10 @@
                 <!--分库-->
                 <bean class="com.yulintu.thematic.data.sharding.ShardElement">
                     <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
-                    <property name="name" value="分库00"/>
-                    <property name="group" value="zoneCode"/>
+                    <property name="name" value="分库00-0"/>
+                    <property name="group" value="分库1"/>
                     <property name="connectionString"
-                              value="configure=datasources/spring.datasource.oracle.xml;type=spring"/>
+                              value="configure=datasources/spring.datasource1.xml;type=spring"/>
                     <property name="properties">
                         <props>
                             <prop key="zone">5101</prop>
@@ -49,17 +36,16 @@
                 </bean>
                 <bean class="com.yulintu.thematic.data.sharding.ShardElement">
                     <property name="provider" value="com.yulintu.thematic.data.hibernate.ProviderPersistenceImpl"/>
-                    <property name="name" value="分库01"/>
-                    <property name="group" value="zoneCode"/>
+                    <property name="name" value="分库00-1"/>
+                    <property name="group" value="分库2"/>
                     <property name="connectionString"
-                              value="configure=datasources/spring.datasource.oracle1.xml;type=spring"/>
+                              value="configure=datasources/spring.datasource2.xml;type=spring"/>
                     <property name="properties">
                         <props>
                             <prop key="zone">5102</prop>
                         </props>
                     </property>
                 </bean>
-
             </list>
         </property>
     </bean>

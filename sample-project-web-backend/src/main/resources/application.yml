@@ -15,7 +15,7 @@ info:
     target: @java.version@
 
 datasource:
-  sharding: false
+  sharding: true
 
 activiti:
     database-schema-update: true

@@ -29,7 +29,7 @@ public class Jt {
     private String mc;
 
     @NotBlank(groups = {Insert.class, Update.class})
-    private String bh;
+    public String bh;
 
     private String dz;
 

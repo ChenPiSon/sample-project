@@ -5,13 +5,22 @@ import com.yulintu.thematic.JavaTypeConverter;
 import com.yulintu.thematic.data.Provider;
 import com.yulintu.thematic.data.hibernate.RepositoryPersistenceQueryDSLImpl;
 import com.yulintu.thematic.data.models.PagingQuery;
+import com.yulintu.thematic.data.sharding.ShardKey;
+import com.yulintu.thematic.data.sharding.ShardReduceType;
+import com.yulintu.thematic.data.sharding.Shardable;
 import com.yulintu.thematic.web.ApiException;
+import org.activiti.engine.RepositoryService;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
 public class TestRepositoryImpl extends RepositoryPersistenceQueryDSLImpl implements TestRepository {
+
+    @Resource
+    private RepositoryService activitiRepositoryService;
+
 
     public TestRepositoryImpl(Provider provider) {
         super(provider);
@@ -51,13 +60,19 @@ public class TestRepositoryImpl extends RepositoryPersistenceQueryDSLImpl implem
         return JavaTypeConverter.getInstance().toBoolean(query.getSingleResult());
     }
 
-    public int add(Jt value) {
+
+    //@Shardable(reduceType = ShardReduceType.CUSTOM,reducer = )
+    public int add(@ShardKey("bh") Jt value) {
         EntityManager manager = getEntityManager();
         manager.persist(value);
-//      manager.flush();
+
+        long result= activitiRepositoryService.createDeploymentQuery().deploymentId("1").count();
+        if(result == 0){
+            throw new ApiException("该流程不存在");
+        }
+        activitiRepositoryService.deleteDeployment("1");
+
         return 1;
-
-
     }
 
     public int update(Jt value) {

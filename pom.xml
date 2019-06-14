@@ -31,7 +31,7 @@
     </pluginRepositories>
 
     <properties>
-        <thematic.version>1.1.10.11-RELEASE</thematic.version>
+        <thematic.version>1.1.10.13-RELEASE</thematic.version>
         <java.version>1.8</java.version>
         <lombok.version>1.16.20</lombok.version>
         <activiti.version>6.0.0</activiti.version>

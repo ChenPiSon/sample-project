@@ -15,7 +15,7 @@
         <constructor-arg name="targetDataSource">
             <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
                 <property name="name" value="practice"/>
-                <property name="url" value="jdbc:postgresql://192.168.21.37:5432/family_management"/>
+                <property name="url" value="jdbc:postgresql://192.168.21.37:5432/family_management_02"/>
                 <property name="username" value="postgres"/>
                 <property name="password" value="123456"/>
                 <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -38,6 +38,7 @@
             <props>
                 <prop key="provider.type">postgresql</prop>
                 <prop key="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect</prop>
+
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.jdbc.batch_size">1</prop>

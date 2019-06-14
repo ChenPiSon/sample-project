@@ -2,7 +2,8 @@
 2 内存缓存  ok
 3 activiti流程-------ok
 4 mongodb/es
-5 分库
+5 分库        ok
 6 中间语言
 7 数据库实体生成
 8 DTO实体拆分
+9 CI、CD集成

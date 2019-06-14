@@ -5,6 +5,7 @@ import com.yulintu.business.cache.service.MemoryService;
 import com.yulintu.business.cache.service.RedisService;
 import com.yulintu.business.services.TestService;
 import com.yulintu.business.entities.Jt;
+import com.yulintu.thematic.data.Trackable;
 import com.yulintu.thematic.data.models.Page;
 import com.yulintu.thematic.data.models.PagingQuery;
 import com.yulintu.thematic.web.ResponseData;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
+@Trackable
 @Api(tags = {"示例Controller"})
 public class TestController {
 

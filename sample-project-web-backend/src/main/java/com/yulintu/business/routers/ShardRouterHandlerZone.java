@@ -45,6 +45,7 @@ public class ShardRouterHandlerZone implements ShardRouterHandler {
         if ("86".equals(code))
             return true;
 
-        return zone.startsWith(code) || code.startsWith(zone);
+        //return zone.startsWith(code) || code.startsWith(zone);
+        return  code.startsWith(zone);
     }
 }
